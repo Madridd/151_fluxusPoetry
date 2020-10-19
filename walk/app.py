@@ -13,3 +13,20 @@ import re
 
 def index():
     return render_template("index.html")
+
+
+    ##look at proffessors example on git https://github.com/gramlivingston/derieve
+
+@app.route('/pageTwo')
+def edm():
+    headers = {'user-agent': 'Mozilla/5.0'}
+    page = requests.get("https://en.wikipedia.org/wiki/Electronic_dance_music", headers=headers)
+    soup = BeautifulSoup(page.content, 'html.parser')
+
+    whitelist = [
+    'p'
+    ]
+
+    text = [t for t in soup.find_all(text=True) if t.parent.name in whitelist]
+    print (text)
+    return render_template("pageTwo.html", text = text )
