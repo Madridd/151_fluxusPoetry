@@ -28,7 +28,7 @@ def edm():
     ]
 
     text = [t for t in soup.find_all(text=True) if t.parent.name in whitelist]
-    print (text)
+    #print (text)
     return render_template("pageTwo.html", text = text )
 
 @app.route('/pageThree')
@@ -42,5 +42,19 @@ def hiphop():
     ]
 
     text = [t for t in soup3.find_all(text=True) if t.parent.name in whitelist3]
-    print (text)
+    #print (text)
     return render_template("pageThree.html", text = text )
+
+@app.route('/pageFour')
+def rock():
+    headers = {'user-agent': 'Mozilla/5.0'}
+    page4 = requests.get("https://en.wikipedia.org/wiki/Rock_music", headers=headers)
+    soup4 = BeautifulSoup(page4.content, 'html.parser')
+
+    whitelist4 = [
+    'p'
+    ]
+
+    text = [t for t in soup4.find_all(text=True) if t.parent.name in whitelist4]
+    #print (text)
+    return render_template("pageFour.html", text = text )
