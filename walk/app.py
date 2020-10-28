@@ -58,3 +58,16 @@ def rock():
     text = [t for t in soup4.find_all(text=True) if t.parent.name in whitelist4]
     #print (text)
     return render_template("pageFour.html", text = text )
+
+@app.route('/pageFive')
+def jazz():
+    headers = {'user-agent': 'Mozilla/5.0'}
+    page5 = requests.get("https://en.wikipedia.org/wiki/Jazz", headers=headers)
+    soup5 = BeautifulSoup(page5.content, 'html.parser')
+
+    whitelist5 = [
+    'p'
+    ]
+
+    text = [t for t in soup5.find_all(text=True) if t.parent.name in whitelist5]
+    return render_template("pageFive.html", text = text )
